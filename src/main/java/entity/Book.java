@@ -7,9 +7,23 @@ public class Book {
     private String book_name;
     private String author_name;
     private String isbn;
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public Book(int book_id, String book_name, String author_name, String isbn) {
         this.book_id = book_id;
+        this.book_name = book_name;
+        this.author_name = author_name;
+        this.isbn = isbn;
+    }
+    public Book(String book_name, String author_name, String isbn) {
         this.book_name = book_name;
         this.author_name = author_name;
         this.isbn = isbn;
@@ -63,10 +77,11 @@ public class Book {
     @Override
     public String toString() {
         return "Book{" +
-               "book_id=" + book_id +
-               ", book_name='" + book_name + '\'' +
-               ", author_name='" + author_name + '\'' +
-               ", isbn='" + isbn + '\'' +
-               '}';
+                "book_id=" + book_id +
+                ", book_name='" + book_name + '\'' +
+                ", author_name='" + author_name + '\'' +
+                ", isbn='" + isbn + '\'' +
+                ", status='" + status + '\'' +
+                '}';
     }
 }

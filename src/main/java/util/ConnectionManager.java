@@ -1,5 +1,6 @@
 package util;
 
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -16,7 +17,7 @@ public class ConnectionManager {
             throw new RuntimeException(e);
         }
         try{
-            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/digital_library","postgres","1");
+            return DriverManager.getConnection(URL_KEY,USER_KEY,PASSWORD_KEY);
         } catch(SQLException e){
             throw new RuntimeException(e);
         }

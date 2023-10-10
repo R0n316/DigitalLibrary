@@ -1,8 +1,9 @@
 package dao;
 
+import entity.Status;
 import entity.User;
+import service.UserService;
 import util.ConnectionManager;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -44,6 +45,71 @@ public class UserDao implements Dao<Integer,User>{
         }
     }
 
+    public List<String> findUserBooks(){
+        try(Connection connection = ConnectionManager.getConnection()){
+            User user = UserService.getUser();
+            List<String> books = new ArrayList<>();
+            String findBooks = """
+                    SELECT book_name
+                    FROM users
+                    JOIN rented_books USING(user_id)
+                    JOIN books USING (book_id)
+                    WHERE user_id = %s
+                    """.formatted(user.getUserID());
+            PreparedStatement preparedStatement = connection.prepareStatement(findBooks);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                books.add(resultSet.getObject("book_name", String.class));
+            }
+            return books;
+        } catch(SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+    public void takeBook(int id){
+        try(Connection connection = ConnectionManager.getConnection()){
+            User user = UserService.getUser();
+            int bookId = BookDao.findAvailableBook(id);
+            if(bookId==0){
+                return;
+            }
+            String query = """
+                    INSERT INTO rented_books VALUES
+                    (%s,%s)
+                    """.formatted(user.getUserID(),bookId);
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.execute();
+            String updateStatus = """
+                    UPDATE books
+                    SET status = '%s'
+                    WHERE book_id = %s
+                    """.formatted(Status.UNAVAILABLE,bookId);
+            preparedStatement = connection.prepareStatement(updateStatus);
+            preparedStatement.execute();
+        } catch(SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+    public void returnBook(int bookId){
+        try(Connection connection = ConnectionManager.getConnection()){
+            User user = UserService.getUser();
+            String delete = """
+                    DELETE FROM rented_books
+                    WHERE user_id = %s AND book_id = %s
+                    """.formatted(user.getUserID(),bookId);
+            PreparedStatement preparedStatement = connection.prepareStatement(delete);
+            preparedStatement.execute();
+            String update = """
+                    UPDATE books
+                    SET status = '%s'
+                    WHERE book_id = %s
+                    """.formatted(Status.AVAILABLE,bookId);
+            preparedStatement = connection.prepareStatement(update);
+            preparedStatement.execute();
+        } catch(SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
     @Override
     public User findById(String id) {
         try (Connection connection = ConnectionManager.getConnection()) {
@@ -93,7 +159,7 @@ public class UserDao implements Dao<Integer,User>{
     }
 
     @Override
-    public User save(User entity) {
-        return null;
+    public boolean save(User entity) {
+        return false;
     }
 }
