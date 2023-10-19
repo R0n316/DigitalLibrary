@@ -2,9 +2,9 @@ package servlet;
 
 import service.UserService;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
+import jakarta.servlet.annotation.*;
 import java.io.IOException;
 
 @WebServlet("/registration")
@@ -25,7 +25,7 @@ public class RegistrationServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath());
         }
         else{
-            response.sendRedirect("/DigitalLibrary_war_exploded/home");
+            response.sendRedirect("/home");
         }
     }
 }

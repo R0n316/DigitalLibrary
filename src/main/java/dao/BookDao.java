@@ -26,7 +26,7 @@ public class BookDao implements Dao<Integer, Book> {
                 INSERT INTO books(book_name, author_name, isbn)
                 VALUES
                 ('%s','%s','%s')
-                """.formatted(entity.getBook_name(),entity.getAuthor_name(),entity.getIsbn());
+                """.formatted(entity.getBookName(),entity.getAuthorName(),entity.getIsbn());
     }
     private Book buildBook(ResultSet resultSet) throws SQLException {
         return new entity.Book(
@@ -88,7 +88,7 @@ public class BookDao implements Dao<Integer, Book> {
     }
     @Override
     public boolean save(Book entity) {
-        if(entity.getBook_name()==null||entity.getAuthor_name()==null||entity.getIsbn()==null){
+        if(entity.getBookName()==null||entity.getAuthorName()==null||entity.getIsbn()==null){
             return false;
         }
         try(Connection connection = ConnectionManager.getConnection()){

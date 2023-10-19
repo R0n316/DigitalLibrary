@@ -55,7 +55,7 @@ public class UserDao implements Dao<Integer,User>{
                     JOIN rented_books USING(user_id)
                     JOIN books USING (book_id)
                     WHERE user_id = %s
-                    """.formatted(user.getUserID());
+                    """.formatted(user.getUserId());
             PreparedStatement preparedStatement = connection.prepareStatement(findBooks);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
@@ -76,7 +76,7 @@ public class UserDao implements Dao<Integer,User>{
             String query = """
                     INSERT INTO rented_books VALUES
                     (%s,%s)
-                    """.formatted(user.getUserID(),bookId);
+                    """.formatted(user.getUserId(),bookId);
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.execute();
             String updateStatus = """
@@ -96,7 +96,7 @@ public class UserDao implements Dao<Integer,User>{
             String delete = """
                     DELETE FROM rented_books
                     WHERE user_id = %s AND book_id = %s
-                    """.formatted(user.getUserID(),bookId);
+                    """.formatted(user.getUserId(),bookId);
             PreparedStatement preparedStatement = connection.prepareStatement(delete);
             preparedStatement.execute();
             String update = """

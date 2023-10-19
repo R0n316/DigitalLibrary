@@ -1,2 +1,4 @@
-package filter;public class CharacterFilter {
+package filter;
+public class CharacterFilter {
+
 }

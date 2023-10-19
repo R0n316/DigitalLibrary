@@ -2,6 +2,7 @@ package service;
 
 import dao.UserDao;
 import entity.User;
+import lombok.Getter;
 import util.ConnectionManager;
 
 import java.sql.Connection;
@@ -11,12 +12,10 @@ import java.util.List;
 import java.util.Optional;
 
 public class UserService {
+    @Getter
     private static User user = null;
     private static final UserDao userDao = UserDao.getInstance();
     private UserService(){}
-    public static User getUser(){
-        return user;
-    }
 
     public static boolean singIn(String login, String password){
         user = userDao.checkUserData(login,password);

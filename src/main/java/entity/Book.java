@@ -1,87 +1,27 @@
 package entity;
 
-import java.util.Objects;
+import lombok.*;
 
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
 public class Book {
-    private int book_id;
-    private String book_name;
-    private String author_name;
+    private int bookId;
+    private String bookName;
+    private String authorName;
     private String isbn;
     private String status;
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Book(int book_id, String book_name, String author_name, String isbn) {
-        this.book_id = book_id;
-        this.book_name = book_name;
-        this.author_name = author_name;
+    public Book(int bookId, String bookName, String authorName, String isbn) {
+        this.bookId = bookId;
+        this.bookName = bookName;
+        this.authorName = authorName;
         this.isbn = isbn;
     }
-    public Book(String book_name, String author_name, String isbn) {
-        this.book_name = book_name;
-        this.author_name = author_name;
+    public Book(String bookName, String authorName, String isbn) {
+        this.bookName = bookName;
+        this.authorName = authorName;
         this.isbn = isbn;
-    }
-
-    public int getBook_id() {
-        return book_id;
-    }
-
-    public void setBook_id(int book_id) {
-        this.book_id = book_id;
-    }
-
-    public String getBook_name() {
-        return book_name;
-    }
-
-    public void setBook_name(String book_name) {
-        this.book_name = book_name;
-    }
-
-    public String getAuthor_name() {
-        return author_name;
-    }
-
-    public void setAuthor_name(String author_name) {
-        this.author_name = author_name;
-    }
-
-    public String getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Book book = (Book) o;
-        return book_id == book.book_id;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(book_id);
-    }
-
-    @Override
-    public String toString() {
-        return "Book{" +
-                "book_id=" + book_id +
-                ", book_name='" + book_name + '\'' +
-                ", author_name='" + author_name + '\'' +
-                ", isbn='" + isbn + '\'' +
-                ", status='" + status + '\'' +
-                '}';
     }
 }

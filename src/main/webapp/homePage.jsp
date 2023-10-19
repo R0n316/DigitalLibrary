@@ -7,29 +7,27 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <link rel="stylesheet" href="style/homePageStyle.css">
     <title>Title</title>
 </head>
 <body>
-    <div class = "registration">
-        <h3>Your books:</h3>
-        <h4><%=UserService.findUserBooks()%></h4>
-        <h3>Available books:</h3>
-        <h4><%=BookService.findAllAvailableBooks()%></h4>
-        <%String bookId = request.getParameter("book_id");
-            if(bookId!=null){%>
+<div>
+    <h3>Your books:</h3>
+    <h4>${UserService.findUserBooks()}</h4>
+    <h4>Available books:</h4>
+    <h4>${BookService.findAllAvailableBooks()}</h4>
+    <c:if test="${param.book_id!=null}">
         <h3>User take new book:)</h3>
-        <h4><%=UserService.findUserBooks()%></h4>
+        ${UserService.takeBook(param.book_id)}
         <h3>Available books:</h3>
-        <h4><%=BookService.findAllAvailableBooks()%></h4>
-        <%}%>
-        <%
-            String returnBook = request.getParameter("returnBook");
-            if(returnBook!=null){
-                UserService.returnBook(Integer.parseInt(returnBook));
-            }%>
-    </div>
+        <h4>${BookService.findAllAvailableBooks()}</h4>
+    </c:if>
+    <c:if test="${param.return_book!=null}">
+        ${UserService.returnBook(param.return_book)}
+    </c:if>
+</div>
 </body>
 </html>

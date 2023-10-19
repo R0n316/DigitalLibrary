@@ -11,7 +11,7 @@ public class BookService {
     private static final BookDao bookDao = BookDao.getInstance();
     private BookService(){}
     public static List<BookDto> findAll(){
-        return bookDao.findAll().stream().map(book -> new BookDto(book.getBook_id(),book.getBook_name())).collect(Collectors.toList());
+        return bookDao.findAll().stream().map(book -> new BookDto(book.getBookId(),book.getBookName())).collect(Collectors.toList());
     }
     public static String add(String bookName, String authorName, String isbn){
         Book book = new Book(bookName,authorName,isbn);

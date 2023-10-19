@@ -8,19 +8,24 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <link rel="stylesheet" href="style/style.css">
     <title>Title</title>
 </head>
 <body>
-    <%
-        String login = request.getParameter("login");
-        String password = request.getParameter("password");
-        boolean res = UserService.singIn(login, password);
-        if(!res){
-            response.sendRedirect(request.getContextPath());
-        }
-        else{
-            response.sendRedirect("/DigitalLibrary_war_exploded/home");
-        }
-    %>
+<div class = "registration">
+    <div class = "registrationColor"></div>
+    <img src="style/pngwing.com.png" class = "icon" alt="">
+    <h1 class = "header">D i g i t a l &nbsp;&nbsp;L i b r a r y</h1>
+    <h3 class = "registrationHeader" >welcome</h3>
+    <form class = "registrationPageForm" action="signIn" method="POST">
+        <h2 style="margin-top: 30px" class = "inputName">Login:</h2>
+        <input type = "text" name = "login">
+        <h2 class = "inputName">Password:</h2>
+        <input type="text" name = "password">
+        <div class = "buttonDiv">
+            <button class = "registerButton">Sign in</button>
+        </div>
+    </form>
+</div>
 </body>
 </html>
