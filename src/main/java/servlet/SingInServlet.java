@@ -2,13 +2,13 @@ package servlet;
 
 import service.UserService;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
+import jakarta.servlet.annotation.*;
 import java.io.IOException;
 
 @WebServlet("/signIn")
-public class SingInServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -20,10 +20,13 @@ public class SingInServlet extends HttpServlet {
         String password = request.getParameter("password");
         boolean res = UserService.singIn(login, password);
         if(!res){
-            response.sendRedirect(request.getContextPath());
+            HttpSession session = request.getSession();
+            session.setAttribute("error","true");
+            session.setAttribute("login",login);
+            response.sendRedirect("/signIn.jsp");
         }
         else{
-            response.sendRedirect("/DigitalLibrary_war_exploded/home");
+            response.sendRedirect("/home");
         }
     }
 }
