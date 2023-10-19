@@ -6,7 +6,7 @@
   Time: 19:20
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
@@ -28,6 +28,9 @@
     <c:if test="${param.return_book!=null}">
         ${UserService.returnBook(param.return_book)}
     </c:if>
+    <form action="${pageContext.request.contextPath}/signOut" method="post">
+        <button type="submit">Sign Out</button>
+    </form>
 </div>
 </body>
 </html>

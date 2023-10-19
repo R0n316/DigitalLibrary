@@ -11,6 +11,36 @@
         <servlet-name>homePage</servlet-name>
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>registrationPage</servlet-name>
+        <jsp-file>/registration.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>registrationPage</servlet-name>
+        <url-pattern>/registrationPage</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>signInPage</servlet-name>
+        <jsp-file>/signIn.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>signInPage</servlet-name>
+        <url-pattern>/signInPage</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>startPage</servlet-name>
+        <jsp-file>/startPage.html</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>startPage</servlet-name>
+        <url-pattern>/startPage</url-pattern>
+    </servlet-mapping>
+
+
     <welcome-file-list>
         <welcome-file>startPage.html</welcome-file>
     </welcome-file-list>

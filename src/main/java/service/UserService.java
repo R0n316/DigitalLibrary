@@ -3,6 +3,7 @@ package service;
 import dao.UserDao;
 import entity.User;
 import lombok.Getter;
+import lombok.Setter;
 import util.ConnectionManager;
 
 import java.sql.Connection;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class UserService {
+    @Setter
     @Getter
     private static User user = null;
     private static final UserDao userDao = UserDao.getInstance();
