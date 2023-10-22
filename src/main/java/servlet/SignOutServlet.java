@@ -3,6 +3,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import service.UserService;
+import util.UrlPath;
 
 import java.io.IOException;
 
@@ -17,6 +18,6 @@ public class SignOutServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UserService.setUser(null);
         request.getSession().invalidate();
-        response.sendRedirect("/startPage");
+        response.sendRedirect(UrlPath.START_PAGE);
     }
 }

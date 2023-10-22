@@ -28,8 +28,8 @@
     <c:if test="${param.return_book!=null}">
         ${UserService.returnBook(param.return_book)}
     </c:if>
-    <form action="${pageContext.request.contextPath}/signOut" method="post">
-        <button type="submit">Sign Out</button>
+    <form class = "usersPageForm" action="${pageContext.request.contextPath}/users" method="post">
+        <button type="submit">User info</button>
     </form>
 </div>
 </body>

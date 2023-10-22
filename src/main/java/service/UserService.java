@@ -42,6 +42,9 @@ public class UserService {
             throw new RuntimeException(e);
         }
     }
+    public static List<User> findAllUsers(){
+        return UserDao.getInstance().findAll();
+    }
     public static void takeBook(int bookId){
         UserDao.getInstance().takeBook(bookId);
     }
@@ -50,5 +53,8 @@ public class UserService {
     }
     public static List<String> findUserBooks(){
         return UserDao.getInstance().findUserBooks();
+    }
+    public static List<String> findUserBooksById(String userId){
+        return UserDao.getInstance().findUserBooks(userId);
     }
 }

@@ -44,7 +44,6 @@ public class UserDao implements Dao<Integer,User>{
             throw new RuntimeException(e);
         }
     }
-
     public List<String> findUserBooks(){
         try(Connection connection = ConnectionManager.getConnection()){
             User user = UserService.getUser();
@@ -56,6 +55,27 @@ public class UserDao implements Dao<Integer,User>{
                     JOIN books USING (book_id)
                     WHERE user_id = %s
                     """.formatted(user.getUserId());
+            PreparedStatement preparedStatement = connection.prepareStatement(findBooks);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                books.add(resultSet.getObject("book_name", String.class));
+            }
+            return books;
+        } catch(SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+    public List<String> findUserBooks(String userId){
+        try(Connection connection = ConnectionManager.getConnection()){
+            User user = UserService.getUser();
+            List<String> books = new ArrayList<>();
+            String findBooks = """
+                    SELECT book_name
+                    FROM users
+                    JOIN rented_books USING(user_id)
+                    JOIN books USING (book_id)
+                    WHERE user_id = %s
+                    """.formatted(userId);
             PreparedStatement preparedStatement = connection.prepareStatement(findBooks);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){

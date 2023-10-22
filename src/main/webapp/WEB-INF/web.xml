@@ -33,15 +33,41 @@
 
     <servlet>
         <servlet-name>startPage</servlet-name>
-        <jsp-file>/startPage.html</jsp-file>
+        <jsp-file>/startPage.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>startPage</servlet-name>
         <url-pattern>/startPage</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>userInfo</servlet-name>
+        <jsp-file>/userInfo.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>userInfo</servlet-name>
+        <url-pattern>/userInfo</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>userBooks</servlet-name>
+        <jsp-file>/userBooks.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>userBooks</servlet-name>
+        <url-pattern>/userBooks</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>unavailablePage</servlet-name>
+        <jsp-file>/unavailablePage.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>unavailablePage</servlet-name>
+        <url-pattern>/unavailablePage</url-pattern>
+    </servlet-mapping>
 
     <welcome-file-list>
-        <welcome-file>startPage.html</welcome-file>
+        <welcome-file>startPage.jsp</welcome-file>
     </welcome-file-list>
 </web-app>

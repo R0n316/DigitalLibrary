@@ -12,20 +12,23 @@
     <title>Title</title>
 </head>
 <body>
-<div class = "registration">
-    <div class = "registrationColor"></div>
-    <img src="style/pngwing.com.png" class = "icon" alt="">
-    <h1 class = "header">D i g i t a l &nbsp;&nbsp;L i b r a r y</h1>
-    <h3 class = "registrationHeader" >welcome</h3>
-    <form class = "registrationPageForm" action="signIn" method="POST">
-        <h2 style="margin-top: 30px" class = "inputName">Login:</h2>
-        <input type = "text" name = "login">
-        <h2 class = "inputName">Password:</h2>
-        <input type="text" name = "password">
-        <div class = "buttonDiv">
-            <button class = "registerButton">Sign in</button>
-        </div>
-    </form>
+<%@include file="header.jsp"%>
+<div class = "container">
+    <div class = "registration">
+        <div class = "registrationColor"></div>
+        <img src="style/pngwing.com.png" class = "icon" alt="">
+        <h1 class = "header">D i g i t a l &nbsp;&nbsp;L i b r a r y</h1>
+        <h3 class = "registrationHeader"><fmt:message key="page.startPage.welcome"/></h3>
+        <form class = "registrationPageForm" action="${pageContext.request.contextPath}/signIn" method="POST">
+            <h2 style="margin-top: 30px" class = "inputName"><fmt:message key="page.registration.login"/>:</h2>
+            <input type = "text" name = "login">
+            <h2 class = "inputName"><fmt:message key="page.registration.password"/>:</h2>
+            <input type="text" name = "password">
+            <div class = "buttonDiv">
+                <button type="submit" class = "registerButton"><fmt:message key="page.signIn.sendButton"/></button>
+            </div>
+        </form>
+    </div>
 </div>
 </body>
 </html>

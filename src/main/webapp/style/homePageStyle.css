@@ -5,3 +5,9 @@
 body{
 
 }
+header{
+    z-index: 3;
+    width: auto;
+    height: 200px;
+    background-color: #ff0000;
+}

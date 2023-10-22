@@ -5,6 +5,8 @@ import service.UserService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import util.UrlPath;
+
 import java.io.IOException;
 
 @WebServlet("/signIn")
@@ -23,10 +25,11 @@ public class SingInServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("error","true");
             session.setAttribute("login",login);
-            response.sendRedirect("/signIn.jsp");
+            response.sendRedirect(UrlPath.SIGN_IN_PAGE);
         }
         else{
-            response.sendRedirect("/home");
+            request.getSession().setAttribute("user",UserService.getUser());
+            response.sendRedirect(UrlPath.HOME);
         }
     }
 }
