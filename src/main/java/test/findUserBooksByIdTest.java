@@ -1,5 +1,7 @@
 package test;
 
+import entity.Book;
+import service.BookService;
 import service.UserService;
 
 import java.util.List;
@@ -7,9 +9,9 @@ import java.util.List;
 public class findUserBooksByIdTest {
     public static void main(String[] args) {
         String userid = "4";
-        List<String> list = UserService.findUserBooksById(userid);
-        for(String book:list){
-            System.out.println(book);
+        List<Book> list = BookService.findUserBooks(userid);
+        for(Book book:list){
+            System.out.println(book.getBookName());
         }
     }
 }

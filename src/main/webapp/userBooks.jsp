@@ -15,7 +15,7 @@
 <h1>Books:</h1>
 <ul>
     <c:forEach var="book" items="${sessionScope.userBooks}">
-        <li>${book}</li>
+        <li>Book name: ${book.getBookName()}, author: ${book.getAuthorName()}</li>
     </c:forEach>
 </ul>
 </body>

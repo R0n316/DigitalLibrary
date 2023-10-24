@@ -1,6 +1,7 @@
 package service;
 
 import dao.BookDao;
+import dao.UserDao;
 import dto.BookDto;
 import entity.Book;
 
@@ -20,7 +21,19 @@ public class BookService {
     public static String delete(String id){
         return BookDao.getInstance().delete(Integer.parseInt(id)) ? "The book was successfully deleted." : "Error when trying to delete a book.";
     }
-    public static List<String> findAllAvailableBooks(){
+    public static List<Book> findAllAvailableBooks(){
         return BookDao.getInstance().findAllAvailableBooks();
+    }
+    public static List<Book> findUserBooks(){
+        return BookDao.getInstance().findUserBooks();
+    }
+    public static void takeBook(int bookId){
+        BookDao.getInstance().takeBook(bookId);
+    }
+    public static void returnBook(int bookId){
+        BookDao.getInstance().returnBook(bookId);
+    }
+    public static List<Book> findUserBooks(String userId){
+        return BookDao.getInstance().findUserBooks(userId);
     }
 }

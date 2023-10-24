@@ -13,7 +13,7 @@
 </head>
 <body>
     <h1>Oops... The page seems to be unavailable</h1>
-    <form class="unavailablePageForm" action="${pageContext.servletContext.contextPath}/redirect" method="post">
+    <form class="unavailablePageForm" action="${pageContext.servletContext.contextPath}/${param.page}" method="post">
         <c:if test="${sessionScope.prevPage!=null}">
             <button type="submit" name="page"
             ><a href="${pageContext.servletContext.contextPath}${sessionScope.prevPage}">prevPage</a></button>

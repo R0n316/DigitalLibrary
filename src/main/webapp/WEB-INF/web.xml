@@ -67,6 +67,15 @@
         <url-pattern>/unavailablePage</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>userProfile</servlet-name>
+        <jsp-file>/userProfile.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>userProfile</servlet-name>
+        <url-pattern>/profile</url-pattern>
+    </servlet-mapping>
+
     <welcome-file-list>
         <welcome-file>startPage.jsp</welcome-file>
     </welcome-file-list>

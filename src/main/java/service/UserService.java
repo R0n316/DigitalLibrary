@@ -1,6 +1,8 @@
 package service;
 
+import dao.BookDao;
 import dao.UserDao;
+import entity.Book;
 import entity.User;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,6 +24,9 @@ public class UserService {
     public static boolean singIn(String login, String password){
         user = userDao.checkUserData(login,password);
         return user!=null;
+    }
+    public static User findUser(String login){
+        return userDao.findById(String.valueOf(login));
     }
     public static boolean registration(String userName, String login, String password){
         try(Connection connection = ConnectionManager.getConnection()){
@@ -45,16 +50,7 @@ public class UserService {
     public static List<User> findAllUsers(){
         return UserDao.getInstance().findAll();
     }
-    public static void takeBook(int bookId){
-        UserDao.getInstance().takeBook(bookId);
-    }
-    public static void returnBook(int bookId){
-        UserDao.getInstance().returnBook(bookId);
-    }
-    public static List<String> findUserBooks(){
-        return UserDao.getInstance().findUserBooks();
-    }
-    public static List<String> findUserBooksById(String userId){
-        return UserDao.getInstance().findUserBooks(userId);
+    public static void changeData(String attribute, String value){
+        UserDao.getInstance().changeData(attribute,value);
     }
 }

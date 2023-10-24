@@ -16,17 +16,23 @@
 <body>
 <div>
     <h3>Your books:</h3>
-    <h4>${UserService.findUserBooks()}</h4>
+    <c:forEach var="book" items="${BookService.findUserBooks()}">
+        <h4>${book.getBookName()}</h4>
+    </c:forEach>
     <h4>Available books:</h4>
-    <h4>${BookService.findAllAvailableBooks()}</h4>
+    <c:forEach var="book" items="${BookService.findAllAvailableBooks()}">
+    <h4>${book.getBookName()}</h4>
+    </c:forEach>
     <c:if test="${param.book_id!=null}">
         <h3>User take new book:)</h3>
-        ${UserService.takeBook(param.book_id)}
+        ${BookService.takeBook(param.book_id)}
         <h3>Available books:</h3>
-        <h4>${BookService.findAllAvailableBooks()}</h4>
+        <c:forEach var="book" items="${BookService.findAllAvailableBooks()}">
+            <h4>${book.getBookName()}</h4>
+        </c:forEach>
     </c:if>
     <c:if test="${param.return_book!=null}">
-        ${UserService.returnBook(param.return_book)}
+        ${BookService.returnBook(param.return_book)}
     </c:if>
     <form class = "usersPageForm" action="${pageContext.request.contextPath}/users" method="post">
         <button type="submit">User info</button>
