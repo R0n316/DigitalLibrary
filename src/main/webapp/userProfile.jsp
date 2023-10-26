@@ -12,12 +12,22 @@
     <link rel="stylesheet" href="style/profileStyle.css">
 </head>
 <body>
-    <h1>Profile picture:</h1>
-    <div class = "profilePicture">
 
-    </div>
-    <div></div>
-    <h1>Your name: ${UserService.getUser().getUserName()}</h1>
+
+<h1>Profile picture:</h1>
+<img src="${pageContext.request.contextPath}/images/users/${UserService.getAttribute('img')}" alt="User image" class =
+        "profilePicture">
+<form action="${pageContext.servletContext.contextPath}/change" method="post" enctype="multipart/form-data">
+    <label>
+        Upload image:
+        <input type="file" name="image">
+        <input type="hidden" name="attribute" value="img">
+        <button type="submit">submit</button>
+    </label>
+</form>
+
+
+<h1>Your name: ${UserService.getUser().getUserName()}</h1>
     <form action="${pageContext.servletContext.contextPath}/change" method="post">
         <label>
             Change name:

@@ -1,24 +1,25 @@
 package service;
 
-import dao.BookDao;
 import dao.UserDao;
-import entity.Book;
 import entity.User;
+import jakarta.servlet.http.Part;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.SneakyThrows;
 import util.ConnectionManager;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 public class UserService {
     @Setter
     @Getter
     private static User user = null;
     private static final UserDao userDao = UserDao.getInstance();
+    @Getter
+    private static final String IMAGE_FOLDER = "users/";
     private UserService(){}
 
     public static boolean singIn(String login, String password){
@@ -28,6 +29,7 @@ public class UserService {
     public static User findUser(String login){
         return userDao.findById(String.valueOf(login));
     }
+
     public static boolean registration(String userName, String login, String password){
         try(Connection connection = ConnectionManager.getConnection()){
             user = userDao.findById(login);
@@ -51,6 +53,18 @@ public class UserService {
         return UserDao.getInstance().findAll();
     }
     public static void changeData(String attribute, String value){
-        UserDao.getInstance().changeData(attribute,value);
+        if(user!=null){
+            UserDao.getInstance().changeData(attribute,value);
+            user = UserService.findUser(UserService.getUser().getLogin());
+            UserService.singIn(user.getLogin(),user.getPassword());
+        }
+    }
+    @SneakyThrows
+    public static void uploadImage(Part image){
+        ImageService imageService = ImageService.getInstance();
+        imageService.upload(IMAGE_FOLDER+image.getSubmittedFileName(),image.getInputStream());
+    }
+    public static String getAttribute(String attributeName){
+        return UserDao.getInstance().getAttribute(attributeName);
     }
 }

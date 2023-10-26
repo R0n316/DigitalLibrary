@@ -37,6 +37,9 @@
     <form class = "usersPageForm" action="${pageContext.request.contextPath}/users" method="post">
         <button type="submit">User info</button>
     </form>
+    <form class = "userProfileForm" action="${pageContext.request.contextPath}/profile" method="post">
+        <button type="submit">profile</button>
+    </form>
 </div>
 </body>
 </html>

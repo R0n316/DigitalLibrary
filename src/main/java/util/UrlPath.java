@@ -19,10 +19,11 @@ public class UrlPath {
     public static final String USER_BOOKS = "/userBooks";
     public static final String USER_PROFILE = "/profile";
     public static final String CHANGE = "/change";
+    public static final String IMAGES = "/images";
     private UrlPath(){}
     public static Set<String> getAllPublicPath(){
         return Set.of(START_PAGE,REGISTRATION_PAGE,REGISTRATION,SIGN_IN_PAGE,SIGN_IN,HOME,
                 SIGN_OUT,STYLE,LOCALE,USERS,USER_INFO,UNAVAILABLE_PAGE,USER_BOOK_SERVLET,
-                USER_BOOKS,USER_PROFILE,CHANGE);
+                USER_BOOKS,USER_PROFILE,CHANGE,IMAGES);
     }
 }

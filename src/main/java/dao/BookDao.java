@@ -185,6 +185,12 @@ public class BookDao implements Dao<Integer, Book> {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public String getAttribute(String attributeName) {
+        return null;
+    }
+
     @Override
     public Book findById(String id) {
         return null;

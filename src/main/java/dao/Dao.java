@@ -8,4 +8,5 @@ public interface Dao<K,T> {
     boolean delete(K id);
     void update(K entity);
     boolean save(T entity);
+    String getAttribute(String attributeName);
 }

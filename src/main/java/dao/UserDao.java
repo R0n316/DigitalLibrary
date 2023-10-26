@@ -2,6 +2,7 @@ package dao;
 
 import entity.Status;
 import entity.User;
+import jakarta.mail.search.OrTerm;
 import service.UserService;
 import util.ConnectionManager;
 import java.sql.Connection;
@@ -27,12 +28,18 @@ public class UserDao implements Dao<Integer,User>{
             SET %s = '%s'
             WHERE user_id = %s
             """;
+    private final static String GET_ATTRIBUTE = """
+            SELECT %s
+            FROM users
+            WHERE user_id = %s
+            """;
     private User buildUser(ResultSet resultSet) throws SQLException {
         return  new User(
                 resultSet.getObject("user_id",Integer.class),
                 resultSet.getObject("user_name",String.class),
                 resultSet.getObject("login",String.class),
-                resultSet.getObject("pass",String.class)
+                resultSet.getObject("pass",String.class),
+                resultSet.getObject("img",String.class)
         );
     }
     @Override
@@ -88,7 +95,8 @@ public class UserDao implements Dao<Integer,User>{
     }
     public void changeData(String attribute, String value){
         try(Connection connection = ConnectionManager.getConnection()){
-            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE.formatted(attribute,value,UserService.getUser().getUserId()));
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    UPDATE.formatted(attribute,value,UserService.getUser().getUserId()));
             preparedStatement.execute();
         } catch (SQLException e){
             throw new RuntimeException(e);
@@ -108,5 +116,18 @@ public class UserDao implements Dao<Integer,User>{
     @Override
     public boolean save(User entity) {
         return false;
+    }
+
+    @Override
+    public String getAttribute(String attributeName) {
+        try(Connection connection = ConnectionManager.getConnection()){
+            PreparedStatement preparedStatement = connection.prepareStatement
+                    (GET_ATTRIBUTE.formatted(attributeName,UserService.getUser().getUserId()));
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            return resultSet.getString(attributeName);
+        } catch(SQLException e){
+            throw new RuntimeException(e);
+        }
     }
 }
